@@ -1,6 +1,11 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import Book.Book;
+import Book.BookKind;
+import Book.ExBook;
+import Book.Newspaper;
+
 public class BookManager {
 	ArrayList<Book> books = new ArrayList<Book>();
 	Scanner input;
@@ -9,25 +14,45 @@ public class BookManager {
 	}
 	
 	public void addBook() {//1을 입력하면 나오는 값
-		Book book = new Book();
-		System.out.print("Book Number: ");
-		book.number = input.nextInt();
-		System.out.print("Book Name: ");
-		book.name = input.next();
-		System.out.print("Book Author: ");
-		book.author = input.next();
-		System.out.print("Book Publisher: ");
-		book.publish = input.next();
-		books.add(book);
+		int kind = 0;
+		Book book;
+		while(kind != 1 && kind !=2) {
+			System.out.println("1 for Extra");
+			System.out.println("2 for Novel");
+			System.out.println("3 for Newspaper");
+			System.out.print("Select num 1, 2, or 3 for Book Kind:");
+			kind = input.nextInt();
+			if(kind == 1) {
+				book = new Book(BookKind.Extra);
+				book.getUserInput(input);
+				books.add(book);
+				break;
+			}
+			else if(kind == 2) {
+				book = new ExBook(BookKind.Novel);
+				book.getUserInput(input);
+				books.add(book);
+				break;
+			}
+			else if(kind == 3) {
+				book = new Newspaper(BookKind.Newspaper);
+				book.getUserInput(input);
+				books.add(book);
+				break;
+			}
+			else {
+				System.out.print("Select num for Book Kind between 1 & 2:");
+			}
+		}
 	}
 	public void deleteBook() {//2을 입력하면 나오는 값
 		System.out.print("Book Number: ");
 		int bookNu = input.nextInt();
 		int index = -1;
 		for(int i =0; i<books.size();i++) {
-			if(books.get(i).number == bookNu) {
-			index = i;
-			break;
+			if(books.get(i).getNumber() == bookNu) {
+				index = i;
+				break;
 		}
 		if(index >= 0) {
 			books.remove(index);
@@ -44,7 +69,7 @@ public class BookManager {
 		int bookNu = input.nextInt();
 		for(int i =0; i<books.size();i++) {
 			Book book = books.get(i);
-			if(book.number == bookNu) {
+			if(book.getNumber() == bookNu) {
 				int num = -1;
 				while (num != 5) {
 					System.out.println("**Student Info Edit Menu");
@@ -57,19 +82,23 @@ public class BookManager {
 					num = input.nextInt();
 					if(num == 1) {
 						System.out.print("Book Number: ");
-						book.number = input.nextInt();
+						int number = input.nextInt();
+						book.setNumber(number);
 					}
 					else if(num == 2) {
 						System.out.print("Book Name: ");
-						book.name = input.next();
+						String name = input.next();
+						book.setName(name);
 					}
 					else if(num == 3) {
 						System.out.print("Book Author: ");
-						book.author = input.next();
+						String author = input.next();
+						book.setAuthor(author);
 					}
 					else if(num == 4) {
-						System.out.print("Book Pubhliser: ");
-						book.name = input.next();
+						System.out.print("Book Publisher: ");
+						String publish = input.next();
+						book.setPublish(publish);
 					}
 					else {
 						continue;
