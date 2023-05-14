@@ -2,7 +2,7 @@ package Book;
 
 import java.util.Scanner;
 
-public class Newspaper extends Book {
+public class Newspaper extends Book implements Bookinput{
 	
 	protected String parentauthor;
 	protected String parentpublish;

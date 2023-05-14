@@ -2,7 +2,7 @@ package Book;
 
 import java.util.Scanner;
 
-public class Book {
+public abstract class Book {
 	protected BookKind kind = BookKind.Extra;
 	protected String name;
 	protected int number;
@@ -74,41 +74,6 @@ public class Book {
 		this.kind = kind;
 	}
 	
-	public void printInfo() {
-		String skind = "none";
-		switch(this.kind) {
-		case Extra:
-			skind = "Ex.";
-			break;
-		case Novel:
-			skind = "Nov";
-			break;
-		case Magazine:
-			skind = "Mag";
-			break;
-		case Newspaper:
-			skind = "News";
-			break;
-		default:
-		}
-		System.out.println("kind:" + skind + "name:" + name + "number:" + number + "author: " + author + "publish: " + publish);
-	}
+	public abstract void printInfo();
 	
-	public void getUserInput(Scanner input) {
-		System.out.print("Book Number: ");
-		int number = input.nextInt();
-		this.setNumber(number);
-		
-		System.out.print("Book Name: ");
-		String name = input.next();
-		this.setName(name);
-		
-		System.out.print("Book Author: ");
-		String author = input.next();
-		this.setAuthor(author);
-		
-		System.out.print("Book Publisher: ");
-		String publish = input.next();
-		this.setPublish(publish);
-	}
 }

@@ -2,7 +2,7 @@ package Book;
 
 import java.util.Scanner;
 
-public class ExBook extends Book{
+public class ExBook extends Book implements Bookinput{
 	
 	public ExBook(BookKind kind) {
 		super(kind);
@@ -43,5 +43,25 @@ public class ExBook extends Book{
 		System.out.print("Book Publisher: ");
 		String publish = input.next();
 		this.setPublish(publish);
+	}
+	
+	public void printInfo() {
+		String skind = "none";
+		switch(this.kind) {
+		case Extra:
+			skind = "Ex.";
+			break;
+		case Novel:
+			skind = "Nov";
+			break;
+		case Magazine:
+			skind = "Mag";
+			break;
+		case Newspaper:
+			skind = "News";
+			break;
+		default:
+		}
+		System.out.println("kind:" + skind + "name:" + name + "number:" + number + "author: " + author + "publish: " + publish);
 	}
 }
